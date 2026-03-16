@@ -3,7 +3,7 @@ from book import Book
 from member import Member
 
 library = Library()
-admin_password = 1234
+admin_password = "1234"
 
 while True:
     print("Velkommen til Zealands bibliotekssystem")
@@ -91,14 +91,49 @@ while True:
                     file_format = input("Indtast filformat: ")
                     new_book = Audiobook(title, author, isbn, copies, voice_actor, file_format)
             
-            library.add_book(new_book)
-            print(f"{title} er tilføjet til systemet")
+                library.add_book(new_book)
+                print(f"{title} er tilføjet til systemet")
 
             if choice == "2":
-                remove_requested_book = input("Indtast titel eller isbn på bogen der skal fjernes")
+                isbn = input("Indtast isbn på bogen der skal fjernes fra systemet: ")
+                library.remove_book(isbn)
                 
+            if choice == "3":
+                index_or_isbn = input("Vil du opdatere bogen via indeks-søgning(tast 1) eller isbn-nummer(tast 2)?: ")
+                if index_or_isbn == "1":
+                    library.display_books()
+                    index = int(input("Indtast nummer på bogen der skal opdateres: ")) -1
+                    book = library.books[index]
+                    isbn = book.isbn
+                else:
+                    isbn = input("Indtast isbn på bogen der skal opdateres i systemet: ")
+                title = input("Indtast opdateret titel: ")
+                author = input("indtast opdateret forfatter: ")
+                copies = int(input("Indtast opdateret antal kopier: "))
+
+                print("Hvilken type bog er det?")
+                print("Tryk 1 for fysisk bog")
+                print("Tryk 2 for e-bog")
+                print("Tryk 3 for lydbog")
+                book_type = input("Vælg mellem 1-3: ")
+                
+                if book_type == "1":
+                    file_format = "Fysisk"
+                    voice_actor = None
+                elif book_type == "2":
+                    file_format = "E-bog"
+                    voice_actor = None
+                elif book_type == "3":
+                    file_format = "Lydbog"
+                    voice_actor = input("Indtast navn på oplæser:")
+                else:
+                    print("Forkert indtastning, prøv igen.")
+                library.update_book(isbn, title, author, copies, file_format, voice_actor)
+
+           # if choice == "4":
+
 
     
         
-    else:
-                print("Intet låner ID matcher det indtastede, prøv igen.")
+        else:
+                print("Forkert password, prøv igen")

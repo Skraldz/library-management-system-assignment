@@ -11,14 +11,14 @@ class Book:
 
 class Ebook(Book): # Book i parentes ved denne klassedefinition betyder at Book er forældreklassen (enheritance)
     def __init__(self, title, author, isbn, copies, file_format):
-        super().__init__(title, author, isbn, copies) # Kører init fra Book klassen (enheritance) - Super() bruger forældreklassen (Book)
+        super().__init__(title, author, isbn, copies, file_format) # Kører init fra Book klassen (enheritance) - Super() bruger forældreklassen (Book)
         
     def display_info(self):
         print(f"Titel: {self.title}, Forfatter: {self.author}, Format: {self.file_format}, antal kopier: {self.copies}")
 
 class Audiobook(Book): # Book i parentes ved denne klassedefinition betyder at Book er forældreklassen (enheritance)
     def __init__(self, title, author, isbn, copies, voice_actor, file_format):
-        super().__init__(title, author, isbn, copies) # Kører init fra Book klassen (enheritance) - Super() bruger forældreklassen (Book)
+        super().__init__(title, author, isbn, copies, file_format) # Kører init fra Book klassen (enheritance) - Super() bruger forældreklassen (Book)
         self.voice_actor = voice_actor
 
     def display_info(self):

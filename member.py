@@ -2,7 +2,7 @@ class Member:
     def __init__(self, member_id, name, borrowed_books):
         self.member_id = member_id
         self.name = name
-        self.borrowed_books = borrowed_books
+        self.borrowed_books = []
 
     def display_info(self):
         print(f"Navn: {self.name}, medlems ID: {self.member_id}, lånte bøger: {self.borrowed_books}")

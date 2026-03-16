@@ -7,7 +7,12 @@ class Library:
         self.members = [] # Laber attributen members som en tom liste
     
     def add_book(self, book):
+        for existing_book in self.books:
+            if existing_book.isbn == book.isbn:
+                print("En bog med dette ISBN findes allerede i systemet")
+                return
         self.books.append(book) # Tager listen over alle bøger og tilføjer den enkelte bog til den
+        print("Bogen er tilføjet til systemet")
 
     def remove_book(self, isbn):
         for book in self.books: # Kigger på alle bøger på listen
@@ -17,12 +22,15 @@ class Library:
             else:
                 print("Bogen findes ikke i systemet") # Hvis isbn ikke matcher noget i listen skrives denne i stedet. 
 
-    def update_book(self, isbn, title, author, copies):
+    def update_book(self, isbn, title, author, copies, file_format=None, voice_actor=None):
         for book in self.books: # Kigger på alle bøger på listen
             if book.isbn == isbn: # Hvis isnb matcher en bog på listen kan de tre nederste variabler blive ændret
                 book.title = title
                 book.author = author
                 book.copies = copies
+                book.file_format = file_format
+                if voice_actor and isinstance(book, (Audiobook)):
+                    book.voice_actor = voice_actor
                 print("Bogen er opdateret") # Og denne besked printes
             else:
                 print("Bogen kan ikke findes i systemet.") # Matcher isbn ikke en bog på listen, skrives denne besked
@@ -72,13 +80,13 @@ class Library:
                 print("Låner ID eller ISBN ikke fundet, prøv igen.") 
 
     def return_issued_book(self, member_id, isbn):
-        for member in self.members:
-            if member.member_id == member_id:
-                for book in self.books:
-                    if book.isbn == isbn:
-                        member.return_book(book)
-                        print(f"Bogen({isbn}) er nu returneret")
+        for member in self.members: # Kigger på lånere på låner-listen
+            if member.member_id == member_id: # Hvis et låner ID matcher det indtastede ID
+                for book in member.borrowed_books: # Kigges der på lånerens udlånet bøger
+                    if book.isbn == isbn: # Hvis en bog matcher det indtastede isbn
+                        member.return_book(book) # kaldes return_book funktionen af den specifikke bog
+                        print(f"Bogen({isbn}) er nu returneret") # og denne besked printes
                     else:
-                        print("Bogen er ikke udlånt til denne låner")
+                        print("Bogen er ikke udlånt til denne låner") # Kan bogen ikke findes hos låneren printes denne
             else:
-                print("Låner ID eller ISBN ikke fundet, prøv igen.")
+                print("Låner ID eller ISBN ikke fundet, prøv igen.") # Kan låneren eller ISBN ikke findes printes denne
