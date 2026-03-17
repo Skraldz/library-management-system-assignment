@@ -1,6 +1,6 @@
 class Member:
-    def __init__(self, member_id, name, borrowed_books):
-        self.member_id = member_id
+    def __init__(self, name, borrowed_books):
+        self.member_id = None # tilføjes af library.add_member
         self.name = name
         self.borrowed_books = []
 

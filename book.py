@@ -1,5 +1,5 @@
 class Book:
-    def __init__(self, title, author, isbn, copies, file_format):
+    def __init__(self, title, author, isbn, copies, file_format="Fysisk"):
         self.title = title
         self.author = author
         self.copies = copies

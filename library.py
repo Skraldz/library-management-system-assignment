@@ -5,6 +5,7 @@ class Library:
     def __init__(self):
         self.books = [] # Laver attributen books som en tom liste
         self.members = [] # Laber attributen members som en tom liste
+        self.next_member_id = 0 # tæller der starter på 0
     
     def add_book(self, book):
         for existing_book in self.books:
@@ -43,7 +44,9 @@ class Library:
                 book.display_info() # og viser information om bogen
 
     def add_member(self, member):
+        member.member_id = self.next_member_id # Tildel det næste ledige ID
         self.members.append(member) # Tilføjer et medlem til listen
+        self.next_member_id += 1 # forøg tælleren til næste gang den bruges
 
     def remove_member(self, member_id): 
         for member in self.members: # Kigger på listen af lånere

@@ -1,5 +1,5 @@
 from library import Library
-from book import Book
+from book import Book, Ebook, Audiobook
 from member import Member
 
 library = Library()
@@ -16,7 +16,7 @@ while True:
         input_id = input("Indtast låner ID:")
         found_member = None
         for member in library.members:
-            if member.member_id == input_id:
+            if member.member_id == int(input_id):
                 found_member = member
             
         if found_member:
@@ -92,7 +92,6 @@ while True:
                     new_book = Audiobook(title, author, isbn, copies, voice_actor, file_format)
             
                 library.add_book(new_book)
-                print(f"{title} er tilføjet til systemet")
 
             if choice == "2":
                 isbn = input("Indtast isbn på bogen der skal fjernes fra systemet: ")
@@ -130,10 +129,35 @@ while True:
                     print("Forkert indtastning, prøv igen.")
                 library.update_book(isbn, title, author, copies, file_format, voice_actor)
 
-           # if choice == "4":
+            if choice == "4":
+                new_member_name = input("Indtast navnet på den nye låner: ")
+                new_member = Member(new_member_name)
+                library.add_member(new_member)
+                print(f"Låner {new_member_name} er blevet tildelt ID {new_member.member_id}")
+
+            if choice == "5":
+                member_id = input("Indtast låner ID for at slette låneren fra databasen: ")
+                library.remove_member(member_id)
+
+            if choice == "6":
+                index_or_id = input("Vil du opdatere via indeks-søgning(tast 1) eller låner ID(tast 2)?: ")
+                if index_or_id == "1":
+                    library.display_members()
+                    index = int(input("Indtast indeksnummer på låneren der skal opdateres: ")) -1
+                    member = library.members[index]
+                    member_id = member.member_id
+                else:
+                    member_id = input("Indtast låner ID på låneren der skal opdateres: ")
+                name = input("Indtast det opdaterede låner navn: ")
+                library.update_member(member_id, name)
+                print(f"Låneren er opdateret med navnet {name}.")
 
 
-    
+            if choice == "7":
+                library.display_books()
         
+            if choice == "8":
+                library.display_members()
+
         else:
                 print("Forkert password, prøv igen")
