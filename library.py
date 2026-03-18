@@ -1,4 +1,4 @@
-from book import Book
+from book import Book, Ebook, Audiobook
 from member import Member
 
 class Library:
@@ -56,7 +56,7 @@ class Library:
             else:
                 print("Låneren findes ikke i systemet") # ellers skrives denne
 
-    def update_member(self, member_id, name, borrowed_books): 
+    def update_member(self, name, borrowed_books): 
         for member in self.members: # kigger på lånere på listen
             if member.member_id == member_id: # Hvis låner id matcher det indtastede id
                 member.name = name # kan navnet ændres

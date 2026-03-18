@@ -1,5 +1,5 @@
 class Member:
-    def __init__(self, name, borrowed_books):
+    def __init__(self, name):
         self.member_id = None # tilføjes af library.add_member
         self.name = name
         self.borrowed_books = []

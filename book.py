@@ -6,6 +6,9 @@ class Book:
         self.isbn = isbn
         self.file_format = file_format
 
+    def __str__(self):
+            return f"{self.title} (ISBN: {self.isbn})"
+
     def display_info(self):
         print(f"isbn: {self.isbn}, Titel: {self.title}, Forfatter: {self.author}, Antal kopier: {self.copies}")
 
