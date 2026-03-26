@@ -52,9 +52,12 @@ while True:
 
             if choice == "3":
                 continue
+        else :
+            print("ID ikke fundet, prøv igen.")
+            continue
     
     if choice == "2":
-        password = input("Indtast administrator password")
+        password = input("Indtast administrator password: ")
         if password == admin_password:
             print("Velkommen administrator, foretag en handling:")
             print("Tryk 1 for at tilføje en bog til systemet")

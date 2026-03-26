@@ -5,7 +5,8 @@ class Member:
         self.borrowed_books = []
 
     def display_info(self):
-        print(f"Navn: {self.name}, medlems ID: {self.member_id}, lånte bøger: {self.borrowed_books}")
+        borrowed_titles = [str(book) for book in self.borrowed_books]
+        print(f"Navn: {self.name}, medlems ID: {self.member_id}, lånte bøger: {borrowed_titles}")
 
     def borrow_book(self, book):
         if book.copies > 0: # Hvis der er flere bøger tilbage
