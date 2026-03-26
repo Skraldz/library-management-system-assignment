@@ -6,7 +6,7 @@ A command-line library management system built in Python, demonstrating Object-O
 
 - Add, remove, update, and display books (physical books, e-books, and audiobooks)
 - Add, remove, update, and display library members
-- Issue and return books
+- Borrow and return books
 - Automatic member ID assignment
 - ISBN duplicate prevention
 - Password-protected administrator menu
@@ -44,7 +44,7 @@ python3 main.py
 
 The system has two menus:
 
-**Låner menu (Member menu)**
+**Member menu**
 - Borrow a book by title or ISBN
 - Return a borrowed book
 
@@ -52,6 +52,24 @@ The system has two menus:
 - Add, remove, and update books
 - Add, remove, and update members
 - Display all books and members
+
+## Unit Tests
+
+The project includes 6 unit tests that verify the core functionality of the system.
+
+Run the tests with the following command:
+
+```bash
+python -m unittest test_library.py
+```
+
+The tests cover:
+- Adding a book to the system
+- Rejecting duplicate ISBN numbers
+- Borrowing a book and verifying that the copy count decreases
+- Returning a book and verifying that the copy count increases
+- Attempting to borrow a book with 0 copies available
+- Attempting to return a book that was not borrowed
 
 ## Requirements
 
